@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: todoapp-get-tasks-service
+spec:
+  type: ClusterIP
+  selector:
+    app: get-tasks
+  ports:
+  - port: 8000
+    targetPort: 80

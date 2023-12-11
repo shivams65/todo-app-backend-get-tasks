@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todoapp-get-tasks
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: get-tasks
+  template:
+    metadata:
+      labels:
+        app: get-tasks
+    spec:
+      containers:
+      - name: get-tasks
+        env:
+        -  name: CONNECTION_STRING
+           value: "Driver={ODBC Driver 17 for SQL Server};Server=tcp:todoapp01.database.windows.net,1433;Database=todoapp;Uid=devopsadmin;Pwd=Devadmin12$;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+        image: devopsinsiders/get-tasks
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8000
