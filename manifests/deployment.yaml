@@ -15,8 +15,11 @@ spec:
       containers:
       - name: get-tasks
         env:
-        -  name: CONNECTION_STRING
-           value: "Driver={ODBC Driver 17 for SQL Server};Server=tcp:todoapp01.database.windows.net,1433;Database=todoapp;Uid=devopsadmin;Pwd=Devadmin12$;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+        - name: connectionname
+          valueFrom:
+            configMapKeyRef:
+              key: CONNECTION_STRING
+              name: configmap-get-tasks
         image: devopsinsiders/get-tasks
         resources:
           limits:
